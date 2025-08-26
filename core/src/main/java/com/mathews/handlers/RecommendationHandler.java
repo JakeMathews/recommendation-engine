@@ -1,5 +1,8 @@
 package com.mathews.handlers;
 
+import com.mathews.errors.DuplicateRecommendation;
+import com.mathews.models.AddRecommendationResult;
+import com.mathews.models.Recommendation;
 import com.mathews.repositories.RecommendationRepository;
 
 import java.time.Instant;
@@ -10,5 +13,28 @@ public class RecommendationHandler {
 
     public RecommendationHandler(RecommendationRepository recommendationRepository) {
         this.recommendationRepository = recommendationRepository;
+    }
+
+    public AddRecommendationResult addRecommendation(
+        String recommendationId,
+        String memberId,
+        String itemId,
+        List<String> alternateItemIds,
+        Instant generatedAt
+    ) {
+        try {
+            recommendationRepository.saveRecommendation(
+                new Recommendation(
+                    recommendationId,
+                    memberId,
+                    itemId,
+                    alternateItemIds,
+                    generatedAt
+                )
+            );
+            return new AddRecommendationResult(recommendationId, true);
+        } catch (DuplicateRecommendation e) {
+            return new AddRecommendationResult(recommendationId, false);
+        }
     }
 }

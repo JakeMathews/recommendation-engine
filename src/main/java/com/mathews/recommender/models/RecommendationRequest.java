@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
 import java.util.List;
 
-public record Item(
+public record RecommendationRequest(
     @JsonProperty("recId") // Matching provided examples
     String recommendationId,
     String memberId,

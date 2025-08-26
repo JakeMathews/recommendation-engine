@@ -2,13 +2,20 @@ services:
   postgres:
     image: postgres:17-alpine
     environment:
-      POSTGRES_DB: recommender-db
       POSTGRES_USER: jake
       POSTGRES_PASSWORD: finn_is_the_best_dog
     ports:
       - "5432:5432"
     volumes:
       - postgres_volume:/var/lib/postgresql/data
+
+  flyway:
+    image: flyway/flyway:10.10.0-alpine
+    command: -url=jdbc:postgresql://postgres:5432/postgres -user=jake -password=finn_is_the_best_dog migrate
+    volumes:
+      - ./details/src/main/resources/db/migration:/flyway/sql
+    depends_on:
+      - postgres
 
 volumes:
   postgres_volume:

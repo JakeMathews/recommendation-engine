@@ -3,16 +3,16 @@ package com.mathews.handlers;
 import com.mathews.errors.DuplicateRecommendationException;
 import com.mathews.models.AddRecommendationResult;
 import com.mathews.models.Recommendation;
-import com.mathews.repositories.RecommendationRepository;
+import com.mathews.repositories.RecommendationsRepository;
 
 import java.time.Instant;
 import java.util.List;
 
 public class RecommendationHandler {
-    private final RecommendationRepository recommendationRepository;
+    private final RecommendationsRepository recommendationsRepository;
 
-    public RecommendationHandler(RecommendationRepository recommendationRepository) {
-        this.recommendationRepository = recommendationRepository;
+    public RecommendationHandler(RecommendationsRepository recommendationsRepository) {
+        this.recommendationsRepository = recommendationsRepository;
     }
 
     public AddRecommendationResult addRecommendation(
@@ -23,7 +23,7 @@ public class RecommendationHandler {
         Instant generatedAt
     ) {
         try {
-            recommendationRepository.saveRecommendation(
+            recommendationsRepository.saveRecommendation(
                 new Recommendation(
                     recommendationId,
                     memberId,

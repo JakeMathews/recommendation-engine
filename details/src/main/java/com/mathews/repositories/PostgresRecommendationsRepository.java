@@ -6,7 +6,7 @@ import com.mathews.models.Recommendation;
 import java.util.List;
 import java.util.Optional;
 
-public class PostgresRecommendationRepository implements RecommendationRepository {
+public class PostgresRecommendationsRepository implements RecommendationsRepository {
     @Override
     public void saveRecommendation(Recommendation recommendation) throws DuplicateRecommendationException {
         // TODO: Implement me

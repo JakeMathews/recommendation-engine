@@ -6,7 +6,7 @@ import com.mathews.models.Recommendation;
 import java.util.List;
 import java.util.Optional;
 
-public interface RecommendationRepository {
+public interface RecommendationsRepository {
     // Considered adding a bulk addRecommendations method to the handler, but decided against it due to time constraints.
     // It would likely attempt to save all the recommendations in one transaction, which could be rolled back if there
     //      were any errors (like duplicative entries).

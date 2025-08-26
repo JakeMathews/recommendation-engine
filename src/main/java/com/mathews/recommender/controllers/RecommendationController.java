@@ -28,7 +28,7 @@ public class RecommendationController {
                 recommendation.alternatIds(),
                 recommendation.generatedAt()
             )
-        ); // TODO: Handle errors
+        ); // TODO: Handle results
         return ResponseEntity.ok().build();
     }
 }

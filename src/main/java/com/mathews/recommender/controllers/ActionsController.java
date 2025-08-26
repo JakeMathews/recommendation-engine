@@ -29,7 +29,7 @@ public class ActionsController {
                     request.timestamp()
                 )
             ).toList()
-        );
+        ); // TODO: Handle results
         return ResponseEntity.ok().build();
     }
 }

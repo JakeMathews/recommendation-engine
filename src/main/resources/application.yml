@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/recommender-db
+    username: jake
+    password: finn_is_the_best_dog

@@ -1,6 +1,6 @@
 package com.mathews.handlers;
 
-import com.mathews.errors.DuplicateRecommendation;
+import com.mathews.errors.DuplicateRecommendationException;
 import com.mathews.models.AddRecommendationResult;
 import com.mathews.models.Recommendation;
 import com.mathews.repositories.RecommendationRepository;
@@ -33,7 +33,8 @@ public class RecommendationHandler {
                 )
             );
             return new AddRecommendationResult(recommendationId, true);
-        } catch (DuplicateRecommendation e) {
+        } catch (DuplicateRecommendationException duplicateRecommendationException) {
+            // TODO: Make result a sealed class
             return new AddRecommendationResult(recommendationId, false);
         }
     }

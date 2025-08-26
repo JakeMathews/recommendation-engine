@@ -1,5 +1,7 @@
 package com.mathews.recommender.controllers;
 
+import com.mathews.handlers.ActionHandler;
+import com.mathews.models.Action;
 import com.mathews.recommender.models.ActionsRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,9 +12,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/actions")
 public class ActionsController {
+    private final ActionHandler actionHandler;
+
+    public ActionsController(ActionHandler actionHandler) {
+        this.actionHandler = actionHandler;
+    }
+
     @PostMapping
     public ResponseEntity<Void> addActions(@RequestBody ActionsRequest actionsRequest) {
-        // TODO: Make service call to persist actions
+        actionHandler.addActions(actionsRequest.events().stream()
+            .map(request ->
+                new Action(
+                    request.eventId(),
+                    request.memberId(),
+                    request.itemId(),
+                    request.timestamp()
+                )
+            ).toList()
+        );
         return ResponseEntity.ok().build();
     }
 }

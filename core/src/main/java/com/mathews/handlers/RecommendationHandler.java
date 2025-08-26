@@ -1,16 +1,14 @@
 package com.mathews.handlers;
 
+import com.mathews.repositories.RecommendationRepository;
+
 import java.time.Instant;
 import java.util.List;
 
 public class RecommendationHandler {
-    public void addRecommendation(
-        String recommendationId,
-        String memberId,
-        String itemId,
-        List<String> alternateItemIds,
-        Instant generatedAt
-    ) {
-        // TODO: Implement logic to add recommendation to database
+    private final RecommendationRepository recommendationRepository;
+
+    public RecommendationHandler(RecommendationRepository recommendationRepository) {
+        this.recommendationRepository = recommendationRepository;
     }
 }

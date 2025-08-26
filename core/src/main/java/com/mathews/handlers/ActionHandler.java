@@ -18,9 +18,9 @@ public class ActionHandler {
         return actions.stream().map(action -> {
             try {
                 actionRepository.addAction(action);
-                return new AddActionResult(action.actionId(), true);
+                return (AddActionResult) new AddActionResult.Success(action.actionId());
             } catch (DuplicateActionException duplicateActionException) {
-                return new AddActionResult(action.actionId(), false);
+                return new AddActionResult.Failure(action.actionId(), duplicateActionException);
             }
         }).toList();
     }

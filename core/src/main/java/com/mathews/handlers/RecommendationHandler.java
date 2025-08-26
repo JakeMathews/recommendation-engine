@@ -32,10 +32,9 @@ public class RecommendationHandler {
                     generatedAt
                 )
             );
-            return new AddRecommendationResult(recommendationId, true);
+            return new AddRecommendationResult.Success(recommendationId);
         } catch (DuplicateRecommendationException duplicateRecommendationException) {
-            // TODO: Make result a sealed class
-            return new AddRecommendationResult(recommendationId, false);
+            return new AddRecommendationResult.Failure(recommendationId, duplicateRecommendationException);
         }
     }
 }

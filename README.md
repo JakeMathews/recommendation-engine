@@ -1,3 +1,3 @@
-## Recommendation System for take home interview
-#### Intentionally being vague to prevent searching the solution by other candidates
+## Recommendation System for a take home interview
+#### Intentionally being vague to prevent searching for the solution by other candidates
 

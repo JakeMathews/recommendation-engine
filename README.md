@@ -18,11 +18,9 @@ The root of the project contains the Spring application, with the application co
 - `root`
     - Spring application
     - Contains the application config and rest endpoints
-    - depends on the `core` and `details` modules
+    - Depends on the `core` and `details` modules
+    - Returned models should not be coupled to the `core` or `details` modules
 - `core` - contains the core domain models and interfaces
-    - Ideally has no dependencies on other modules
-    - I was going to tightly couple the model files in core to the spring api, but I felt the urge to rename variables
-      and separate serialization annotations,
-      so spent a little bit more time here than I perhaps should have.
+    - Has no dependencies on other modules
 - `details` - contains implementation details of the interfaces defined in `core`
-    - depends on the `core` module
+    - Depends on the `core` module

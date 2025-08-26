@@ -10,16 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/recommendations")
-public class RecommendationsController {
+public class RecommendationController {
     private final RecommendationHandler recommendationHandler;
 
-    public RecommendationsController(RecommendationHandler recommendationHandler) {
+    public RecommendationController(RecommendationHandler recommendationHandler) {
         this.recommendationHandler = recommendationHandler;
     }
 
     @PostMapping
     public ResponseEntity<Void> addRecommendations(@RequestBody ItemsRequest itemRecommendations) {
         itemRecommendations.items().forEach(recommendation ->
+            // TODO: Validate not-null
             recommendationHandler.addRecommendation(
                 recommendation.recommendationId(),
                 recommendation.memberId(),

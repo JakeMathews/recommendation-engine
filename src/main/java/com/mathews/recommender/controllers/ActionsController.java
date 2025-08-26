@@ -1,4 +1,4 @@
-package com.mathews.recommender.routes;
+package com.mathews.recommender.controllers;
 
 import com.mathews.recommender.models.ActionsRequest;
 import org.springframework.http.ResponseEntity;

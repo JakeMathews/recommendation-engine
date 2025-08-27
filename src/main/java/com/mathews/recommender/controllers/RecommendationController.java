@@ -1,7 +1,7 @@
 package com.mathews.recommender.controllers;
 
 import com.mathews.handlers.RecommendationHandler;
-import com.mathews.recommender.models.ItemsRequest;
+import com.mathews.recommender.models.RecommendationsRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +18,7 @@ public class RecommendationController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addRecommendations(@RequestBody ItemsRequest itemRecommendations) {
+    public ResponseEntity<Void> addRecommendations(@RequestBody RecommendationsRequest itemRecommendations) {
         itemRecommendations.items().forEach(recommendation ->
             // TODO: Validate not-null
             recommendationHandler.addRecommendation(

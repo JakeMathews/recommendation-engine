@@ -4,29 +4,18 @@
 package com.mathews.recommender.jooq.public_.tables;
 
 
-import com.mathews.recommender.jooq.public_.Indexes;
 import com.mathews.recommender.jooq.public_.Keys;
 import com.mathews.recommender.jooq.public_.Public;
-import com.mathews.recommender.jooq.public_.tables.Actions.ActionsPath;
 import com.mathews.recommender.jooq.public_.tables.records.RecommendationsRecord;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 import org.jooq.Condition;
 import org.jooq.Field;
-import org.jooq.ForeignKey;
-import org.jooq.Identity;
-import org.jooq.Index;
-import org.jooq.InverseForeignKey;
 import org.jooq.Name;
-import org.jooq.Path;
 import org.jooq.PlainSQL;
 import org.jooq.QueryPart;
-import org.jooq.Record;
 import org.jooq.SQL;
 import org.jooq.Schema;
 import org.jooq.Select;
@@ -62,29 +51,29 @@ public class Recommendations extends TableImpl<RecommendationsRecord> {
     }
 
     /**
-     * The column <code>public.recommendations.id</code>.
+     * The column <code>public.recommendations.recommendation_id</code>.
      */
-    public final TableField<RecommendationsRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
+    public final TableField<RecommendationsRecord, String> RECOMMENDATION_ID = createField(DSL.name("recommendation_id"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
-     * The column <code>public.recommendations.user_id</code>.
+     * The column <code>public.recommendations.member_id</code>.
      */
-    public final TableField<RecommendationsRecord, String> USER_ID = createField(DSL.name("user_id"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<RecommendationsRecord, String> MEMBER_ID = createField(DSL.name("member_id"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
-     * The column <code>public.recommendations.action_id</code>.
+     * The column <code>public.recommendations.item_id</code>.
      */
-    public final TableField<RecommendationsRecord, String> ACTION_ID = createField(DSL.name("action_id"), SQLDataType.VARCHAR(255), this, "");
+    public final TableField<RecommendationsRecord, String> ITEM_ID = createField(DSL.name("item_id"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
-     * The column <code>public.recommendations.score</code>.
+     * The column <code>public.recommendations.alternate_item_ids</code>.
      */
-    public final TableField<RecommendationsRecord, BigDecimal> SCORE = createField(DSL.name("score"), SQLDataType.NUMERIC(5, 4).nullable(false), this, "");
+    public final TableField<RecommendationsRecord, String[]> ALTERNATE_ITEM_IDS = createField(DSL.name("alternate_item_ids"), SQLDataType.VARCHAR(255).array(), this, "");
 
     /**
-     * The column <code>public.recommendations.created_at</code>.
+     * The column <code>public.recommendations.generated_at</code>.
      */
-    public final TableField<RecommendationsRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field(DSL.raw("now()"), SQLDataType.LOCALDATETIME)), this, "");
+    public final TableField<RecommendationsRecord, LocalDateTime> GENERATED_AT = createField(DSL.name("generated_at"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
 
     private Recommendations(Name alias, Table<RecommendationsRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
@@ -115,72 +104,14 @@ public class Recommendations extends TableImpl<RecommendationsRecord> {
         this(DSL.name("recommendations"), null);
     }
 
-    public <O extends Record> Recommendations(Table<O> path, ForeignKey<O, RecommendationsRecord> childPath, InverseForeignKey<O, RecommendationsRecord> parentPath) {
-        super(path, childPath, parentPath, RECOMMENDATIONS);
-    }
-
-    /**
-     * A subtype implementing {@link Path} for simplified path-based joins.
-     */
-    public static class RecommendationsPath extends Recommendations implements Path<RecommendationsRecord> {
-        public <O extends Record> RecommendationsPath(Table<O> path, ForeignKey<O, RecommendationsRecord> childPath, InverseForeignKey<O, RecommendationsRecord> parentPath) {
-            super(path, childPath, parentPath);
-        }
-        private RecommendationsPath(Name alias, Table<RecommendationsRecord> aliased) {
-            super(alias, aliased);
-        }
-
-        @Override
-        public RecommendationsPath as(String alias) {
-            return new RecommendationsPath(DSL.name(alias), this);
-        }
-
-        @Override
-        public RecommendationsPath as(Name alias) {
-            return new RecommendationsPath(alias, this);
-        }
-
-        @Override
-        public RecommendationsPath as(Table<?> alias) {
-            return new RecommendationsPath(alias.getQualifiedName(), this);
-        }
-    }
-
     @Override
     public Schema getSchema() {
         return aliased() ? null : Public.PUBLIC;
     }
 
     @Override
-    public List<Index> getIndexes() {
-        return Arrays.asList(Indexes.IDX_RECOMMENDATION_SCORE, Indexes.IDX_RECOMMENDATION_USER_ID);
-    }
-
-    @Override
-    public Identity<RecommendationsRecord, Integer> getIdentity() {
-        return (Identity<RecommendationsRecord, Integer>) super.getIdentity();
-    }
-
-    @Override
     public UniqueKey<RecommendationsRecord> getPrimaryKey() {
         return Keys.RECOMMENDATIONS_PKEY;
-    }
-
-    @Override
-    public List<ForeignKey<RecommendationsRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.RECOMMENDATIONS__RECOMMENDATIONS_ACTION_ID_FKEY);
-    }
-
-    private transient ActionsPath _actions;
-
-    /**
-     * Get the implicit join path to the <code>public.actions</code> table.
-     */
-    public ActionsPath actions() {
-        if (_actions == null)
-            _actions = new ActionsPath(this, Keys.RECOMMENDATIONS__RECOMMENDATIONS_ACTION_ID_FKEY, null);
-
-        return _actions;
     }
 
     @Override

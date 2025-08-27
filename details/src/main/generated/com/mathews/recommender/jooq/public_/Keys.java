@@ -9,7 +9,6 @@ import com.mathews.recommender.jooq.public_.tables.Recommendations;
 import com.mathews.recommender.jooq.public_.tables.records.ActionsRecord;
 import com.mathews.recommender.jooq.public_.tables.records.RecommendationsRecord;
 
-import org.jooq.ForeignKey;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
@@ -28,11 +27,5 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<ActionsRecord> ACTIONS_PKEY = Internal.createUniqueKey(Actions.ACTIONS, DSL.name("actions_pkey"), new TableField[] { Actions.ACTIONS.ACTION_ID }, true);
-    public static final UniqueKey<RecommendationsRecord> RECOMMENDATIONS_PKEY = Internal.createUniqueKey(Recommendations.RECOMMENDATIONS, DSL.name("recommendations_pkey"), new TableField[] { Recommendations.RECOMMENDATIONS.ID }, true);
-
-    // -------------------------------------------------------------------------
-    // FOREIGN KEY definitions
-    // -------------------------------------------------------------------------
-
-    public static final ForeignKey<RecommendationsRecord, ActionsRecord> RECOMMENDATIONS__RECOMMENDATIONS_ACTION_ID_FKEY = Internal.createForeignKey(Recommendations.RECOMMENDATIONS, DSL.name("recommendations_action_id_fkey"), new TableField[] { Recommendations.RECOMMENDATIONS.ACTION_ID }, Keys.ACTIONS_PKEY, new TableField[] { Actions.ACTIONS.ACTION_ID }, true);
+    public static final UniqueKey<RecommendationsRecord> RECOMMENDATIONS_PKEY = Internal.createUniqueKey(Recommendations.RECOMMENDATIONS, DSL.name("recommendations_pkey"), new TableField[] { Recommendations.RECOMMENDATIONS.RECOMMENDATION_ID }, true);
 }

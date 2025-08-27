@@ -6,7 +6,6 @@ package com.mathews.recommender.jooq.public_.tables;
 
 import com.mathews.recommender.jooq.public_.Keys;
 import com.mathews.recommender.jooq.public_.Public;
-import com.mathews.recommender.jooq.public_.tables.Recommendations.RecommendationsPath;
 import com.mathews.recommender.jooq.public_.tables.records.ActionsRecord;
 
 import java.time.LocalDateTime;
@@ -14,13 +13,9 @@ import java.util.Collection;
 
 import org.jooq.Condition;
 import org.jooq.Field;
-import org.jooq.ForeignKey;
-import org.jooq.InverseForeignKey;
 import org.jooq.Name;
-import org.jooq.Path;
 import org.jooq.PlainSQL;
 import org.jooq.QueryPart;
-import org.jooq.Record;
 import org.jooq.SQL;
 import org.jooq.Schema;
 import org.jooq.Select;
@@ -104,37 +99,6 @@ public class Actions extends TableImpl<ActionsRecord> {
         this(DSL.name("actions"), null);
     }
 
-    public <O extends Record> Actions(Table<O> path, ForeignKey<O, ActionsRecord> childPath, InverseForeignKey<O, ActionsRecord> parentPath) {
-        super(path, childPath, parentPath, ACTIONS);
-    }
-
-    /**
-     * A subtype implementing {@link Path} for simplified path-based joins.
-     */
-    public static class ActionsPath extends Actions implements Path<ActionsRecord> {
-        public <O extends Record> ActionsPath(Table<O> path, ForeignKey<O, ActionsRecord> childPath, InverseForeignKey<O, ActionsRecord> parentPath) {
-            super(path, childPath, parentPath);
-        }
-        private ActionsPath(Name alias, Table<ActionsRecord> aliased) {
-            super(alias, aliased);
-        }
-
-        @Override
-        public ActionsPath as(String alias) {
-            return new ActionsPath(DSL.name(alias), this);
-        }
-
-        @Override
-        public ActionsPath as(Name alias) {
-            return new ActionsPath(alias, this);
-        }
-
-        @Override
-        public ActionsPath as(Table<?> alias) {
-            return new ActionsPath(alias.getQualifiedName(), this);
-        }
-    }
-
     @Override
     public Schema getSchema() {
         return aliased() ? null : Public.PUBLIC;
@@ -143,19 +107,6 @@ public class Actions extends TableImpl<ActionsRecord> {
     @Override
     public UniqueKey<ActionsRecord> getPrimaryKey() {
         return Keys.ACTIONS_PKEY;
-    }
-
-    private transient RecommendationsPath _recommendations;
-
-    /**
-     * Get the implicit to-many join path to the
-     * <code>public.recommendations</code> table
-     */
-    public RecommendationsPath recommendations() {
-        if (_recommendations == null)
-            _recommendations = new RecommendationsPath(this, null, Keys.RECOMMENDATIONS__RECOMMENDATIONS_ACTION_ID_FKEY.getInverseKey());
-
-        return _recommendations;
     }
 
     @Override

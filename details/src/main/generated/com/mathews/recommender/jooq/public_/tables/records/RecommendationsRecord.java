@@ -6,7 +6,6 @@ package com.mathews.recommender.jooq.public_.tables.records;
 
 import com.mathews.recommender.jooq.public_.tables.Recommendations;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.jooq.Record1;
@@ -22,72 +21,72 @@ public class RecommendationsRecord extends UpdatableRecordImpl<RecommendationsRe
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>public.recommendations.id</code>.
+     * Setter for <code>public.recommendations.recommendation_id</code>.
      */
-    public void setId(Integer value) {
+    public void setRecommendationId(String value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>public.recommendations.id</code>.
+     * Getter for <code>public.recommendations.recommendation_id</code>.
      */
-    public Integer getId() {
-        return (Integer) get(0);
+    public String getRecommendationId() {
+        return (String) get(0);
     }
 
     /**
-     * Setter for <code>public.recommendations.user_id</code>.
+     * Setter for <code>public.recommendations.member_id</code>.
      */
-    public void setUserId(String value) {
+    public void setMemberId(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>public.recommendations.user_id</code>.
+     * Getter for <code>public.recommendations.member_id</code>.
      */
-    public String getUserId() {
+    public String getMemberId() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>public.recommendations.action_id</code>.
+     * Setter for <code>public.recommendations.item_id</code>.
      */
-    public void setActionId(String value) {
+    public void setItemId(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>public.recommendations.action_id</code>.
+     * Getter for <code>public.recommendations.item_id</code>.
      */
-    public String getActionId() {
+    public String getItemId() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>public.recommendations.score</code>.
+     * Setter for <code>public.recommendations.alternate_item_ids</code>.
      */
-    public void setScore(BigDecimal value) {
+    public void setAlternateItemIds(String[] value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>public.recommendations.score</code>.
+     * Getter for <code>public.recommendations.alternate_item_ids</code>.
      */
-    public BigDecimal getScore() {
-        return (BigDecimal) get(3);
+    public String[] getAlternateItemIds() {
+        return (String[]) get(3);
     }
 
     /**
-     * Setter for <code>public.recommendations.created_at</code>.
+     * Setter for <code>public.recommendations.generated_at</code>.
      */
-    public void setCreatedAt(LocalDateTime value) {
+    public void setGeneratedAt(LocalDateTime value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>public.recommendations.created_at</code>.
+     * Getter for <code>public.recommendations.generated_at</code>.
      */
-    public LocalDateTime getCreatedAt() {
+    public LocalDateTime getGeneratedAt() {
         return (LocalDateTime) get(4);
     }
 
@@ -96,7 +95,7 @@ public class RecommendationsRecord extends UpdatableRecordImpl<RecommendationsRe
     // -------------------------------------------------------------------------
 
     @Override
-    public Record1<Integer> key() {
+    public Record1<String> key() {
         return (Record1) super.key();
     }
 
@@ -114,14 +113,14 @@ public class RecommendationsRecord extends UpdatableRecordImpl<RecommendationsRe
     /**
      * Create a detached, initialised RecommendationsRecord
      */
-    public RecommendationsRecord(Integer id, String userId, String actionId, BigDecimal score, LocalDateTime createdAt) {
+    public RecommendationsRecord(String recommendationId, String memberId, String itemId, String[] alternateItemIds, LocalDateTime generatedAt) {
         super(Recommendations.RECOMMENDATIONS);
 
-        setId(id);
-        setUserId(userId);
-        setActionId(actionId);
-        setScore(score);
-        setCreatedAt(createdAt);
+        setRecommendationId(recommendationId);
+        setMemberId(memberId);
+        setItemId(itemId);
+        setAlternateItemIds(alternateItemIds);
+        setGeneratedAt(generatedAt);
         resetChangedOnNotNull();
     }
 }

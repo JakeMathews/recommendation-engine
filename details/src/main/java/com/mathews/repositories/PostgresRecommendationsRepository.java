@@ -56,8 +56,7 @@ public class PostgresRecommendationsRepository implements RecommendationsReposit
     public List<Recommendation> getRecommendationsByMemberId(String memberId) {
         return dsl.selectFrom(RECOMMENDATIONS)
             .where(RECOMMENDATIONS.MEMBER_ID.eq(memberId))
-            .fetch()
-            .map(record -> new Recommendation(
+            .fetch(record -> new Recommendation(
                 record.getRecommendationId(),
                 record.getMemberId(),
                 record.getItemId(),

@@ -1,6 +1,7 @@
 package com.mathews.recommender.config;
 
 import com.mathews.handlers.ActionHandler;
+import com.mathews.handlers.AnalyticsHandler;
 import com.mathews.handlers.RecommendationHandler;
 import com.mathews.repositories.ActionsRepository;
 import com.mathews.repositories.RecommendationsRepository;
@@ -17,5 +18,10 @@ public class HandlerConfig {
     @Bean
     public ActionHandler actionHandler(ActionsRepository actionsRepository) {
         return new ActionHandler(actionsRepository);
+    }
+
+    @Bean
+    public AnalyticsHandler analyticsHandler(ActionsRepository actionsRepository, RecommendationsRepository recommendationsRepository) {
+        return new AnalyticsHandler(actionsRepository, recommendationsRepository);
     }
 }

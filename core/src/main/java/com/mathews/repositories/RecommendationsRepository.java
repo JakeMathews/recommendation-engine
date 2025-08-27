@@ -12,7 +12,9 @@ public interface RecommendationsRepository {
     //      were any errors (like duplicative entries).
     void saveRecommendation(Recommendation recommendation) throws DuplicateRecommendationException;
 
+    // Used only in testing, in reality I would likely push back on exposing this method
     Optional<Recommendation> getRecommendationById(String recommendationId);
 
+    // Specifically for analytics
     List<Recommendation> getRecommendationsByMemberId(String memberId);
 }

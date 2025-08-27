@@ -7,6 +7,7 @@ import org.jooq.exception.DataAccessException;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.List;
 
 import static com.mathews.recommender.jooq.public_.Tables.ACTIONS;
 
@@ -32,5 +33,17 @@ public class PostgresActionsRepository implements ActionsRepository {
             }
             throw dataAccessException;
         }
+    }
+
+    @Override
+    public List<Action> getActionsByMemberId(String memberId) {
+        return dsl.selectFrom(ACTIONS)
+            .where(ACTIONS.MEMBER_ID.eq(memberId))
+            .fetch(record -> new Action(
+                record.getValue(ACTIONS.ACTION_ID),
+                record.getValue(ACTIONS.MEMBER_ID),
+                record.getValue(ACTIONS.ITEM_ID),
+                record.getValue(ACTIONS.TIMESTAMP).toInstant(ZoneOffset.UTC)
+            ));
     }
 }

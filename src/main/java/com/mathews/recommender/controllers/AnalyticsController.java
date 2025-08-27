@@ -1,5 +1,6 @@
 package com.mathews.recommender.controllers;
 
+import com.mathews.handlers.AnalyticsHandler;
 import com.mathews.recommender.models.AnalyticsResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,10 +11,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/analytics")
 public class AnalyticsController {
+    private final AnalyticsHandler analyticsHandler;
+
+    public AnalyticsController(AnalyticsHandler analyticsHandler) {
+        this.analyticsHandler = analyticsHandler;
+    }
+
     @GetMapping("/member/{memberId}")
     public ResponseEntity<AnalyticsResponse> getMemberAnalytics(@PathVariable String memberId) {
-        // TODO: Make service call to get analytics for a given member
-        return ResponseEntity.ok(null);
+        AnalyticsHandler.AnalyticsResult analyticsResult = analyticsHandler.getMemberAnalytics(memberId);
+        return ResponseEntity.ok(
+            new AnalyticsResponse(
+                analyticsResult.recommendationsMade(),
+                analyticsResult.recommendationsAccepted(),
+                analyticsResult.acceptanceRate(),
+                analyticsResult.acceptedTopRecommendations(),
+                analyticsResult.acceptedTop3Recommendations(),
+                analyticsResult.medianTimeToAcceptRecommendation()
+            )
+        );
     }
 
     @GetMapping("/global")

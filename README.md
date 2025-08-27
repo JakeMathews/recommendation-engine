@@ -50,3 +50,5 @@ This project uses a hexagonal architecture to maintain a clean separation of con
 - The deliverables state the project should be a working spring boot project, spent way too much time on that in my
   opinion.
 - Deliverable also wanted a postman collection, but I didn't have time to write one.
+- Definitely would have liked to have written more tests, and accomplish all the deliverables/strech-goals, but I
+  overestimated what I could do in just 4 hours.

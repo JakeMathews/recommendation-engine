@@ -42,9 +42,11 @@ This project uses a hexagonal architecture to maintain a clean separation of con
 
 # Struggles and Feedback
 
-- Adding postgres took WAYYY longer than expected. Ended up copying flyway/jooq setup from a personal project. Not
-  ideal... I wanted to get JPA working, but I already sunk too much time on this issue.
+- Adding postgres and other dependencies took WAYYY longer than expected.
+    - Ended up copying flyway/jooq setup from a personal project. Not
+      ideal... I wanted to get JPA working, but I already sunk too much time on this issue.
 - Providing a starter template project could cut down the time a candidate has to spend on configuring their
   environment/project.
-- Does the project even need to be runnable? I initially assumed so, but given the time constraints, that probably
-  wasn't necessary. Definitely spent too much time on that.
+- The deliverables state the project should be a working spring boot project, spent way too much time on that in my
+  opinion.
+- Deliverable also wanted a postman collection, but I didn't have time to write one.

@@ -1,3 +1,5 @@
+import org.jooq.meta.jaxb.OnError
+
 plugins {
     id("java-library")
     id("nu.studer.jooq") version "9.0"
@@ -47,7 +49,7 @@ jooq {
                         name = "org.jooq.codegen.DefaultGeneratorStrategy"
                     }
                 }
-                onError = org.jooq.meta.jaxb.OnError.LOG // Log errors instead of failing
+                onError = OnError.LOG // Log errors instead of failing due to compatibility issues, kind of hacky
             }
         }
     }

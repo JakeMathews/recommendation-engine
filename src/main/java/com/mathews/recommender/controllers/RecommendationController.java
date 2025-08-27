@@ -1,12 +1,15 @@
 package com.mathews.recommender.controllers;
 
 import com.mathews.handlers.RecommendationHandler;
+import com.mathews.models.AddRecommendationResult;
 import com.mathews.recommender.models.RecommendationsRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/recommendations")
@@ -19,7 +22,7 @@ public class RecommendationController {
 
     @PostMapping
     public ResponseEntity<Void> addRecommendations(@RequestBody RecommendationsRequest itemRecommendations) {
-        itemRecommendations.items().forEach(recommendation ->
+        List<AddRecommendationResult> addRecommendationResults = itemRecommendations.items().stream().map(recommendation ->
             // TODO: Validate not-null
             recommendationHandler.addRecommendation(
                 recommendation.recommendationId(),
@@ -28,7 +31,11 @@ public class RecommendationController {
                 recommendation.alternatIds(),
                 recommendation.generatedAt()
             )
-        ); // TODO: Handle results
+        ).toList();
+
+        if (addRecommendationResults.stream().anyMatch(result -> result instanceof AddRecommendationResult.Failure)) {
+            return ResponseEntity.badRequest().build();
+        }
         return ResponseEntity.ok().build();
     }
 }

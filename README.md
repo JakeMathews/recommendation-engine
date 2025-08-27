@@ -46,9 +46,11 @@ This project uses a hexagonal architecture to maintain a clean separation of con
     - Ended up copying flyway/jooq setup from a personal project. Not
       ideal... I wanted to get JPA working, but I already sunk too much time on this issue.
 - Providing a starter template project could cut down the time a candidate has to spend on configuring their
-  environment/project.
+  environment/project. Additionally reducing the requirements/expected deliverables would cut down on the time
+  required to complete the project. I no longer believe 4 hours is a reasonable time bring this project to completion.
 - The deliverables state the project should be a working spring boot project, spent way too much time on that in my
   opinion.
-- Deliverable also wanted a postman collection, but I didn't have time to write one.
-- Definitely would have liked to have written more tests, and accomplish all the deliverables/strech-goals, but I
+- Requirements included an analytics caching system, but I was already over time.
+- Expected deliverables also wanted a Postman collection, but I didn't have time to write one.
+- Definitely would have liked to have written more tests and achieved all the deliverables/stretch-goals, but I
   overestimated what I could do in just 4 hours.

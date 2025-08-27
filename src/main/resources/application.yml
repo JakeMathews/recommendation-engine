@@ -1,5 +1,5 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/recommender-db
+    url: jdbc:postgresql://localhost:5432/postgres
     username: jake
     password: finn_is_the_best_dog

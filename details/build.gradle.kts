@@ -1,5 +1,5 @@
 plugins {
-    id("java")
+    id("java-library")
     id("nu.studer.jooq") version "9.0"
 }
 
@@ -14,9 +14,9 @@ dependencies {
     implementation(project(":core"))
 
     // Database
-    implementation("org.postgresql:postgresql:42.7.3")
-    implementation("org.jooq:jooq:3.19.6")
-    jooqGenerator("org.postgresql:postgresql:42.7.3")
+    api("org.postgresql:postgresql:42.7.7")
+    api("org.jooq:jooq:3.20.6")
+    jooqGenerator("org.postgresql:postgresql:42.7.7")
 
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
@@ -43,7 +43,11 @@ jooq {
                         packageName = "com.mathews.recommender.jooq"
                         directory = "src/main/generated"
                     }
+                    strategy.apply {
+                        name = "org.jooq.codegen.DefaultGeneratorStrategy"
+                    }
                 }
+                onError = org.jooq.meta.jaxb.OnError.LOG // Log errors instead of failing
             }
         }
     }

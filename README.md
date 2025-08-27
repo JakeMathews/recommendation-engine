@@ -1,7 +1,5 @@
 ## Recommendation System for a take-home interview
 
-#### Intentionally being vague to prevent searching for the solution by other candidates
-
 # Technologies
 
 - Java 21
@@ -13,21 +11,21 @@
 
 # Structure
 
-The root of the project contains the Spring application, with the application config and rest endpoints
+This project uses a hexagonal architecture to maintain a clean separation of concerns.
 
-- Ideally this would be in its own `app` submodule, but I'm not going spend time restructuring the project, I
-  used [Spring Intializr](https://start.spring.io)
-
-- `root`
-    - Spring application
-    - Contains the application config and rest endpoints
+- `root` (API layer)
+    - Spring application containing the application config and rest endpoints
     - Depends on the `core` and `details` modules
     - Returned models should not be coupled to the `core` or `details` modules
-- `core` - contains the core domain models and interfaces
+    - Ideally the API layer would not be in the root of the project, but would be in its own `app` submodule
+
+- `core` (Interfaces / Business logic)
+    - Contains the core domain models, interfaces, and business logic
     - Has no dependencies on other modules
-- `details` - contains implementation details of the interfaces defined in `core`
+- `details` (Implementation)
+    - Contains implementation details of the interfaces defined in `core`
     - Depends on the `core` module
-    - Depends on Spring data for Postgres JPA configuration
+    - Database models were generated using Jooq
 
 # Running
 
@@ -47,6 +45,6 @@ The root of the project contains the Spring application, with the application co
 - Adding postgres took WAYYY longer than expected. Ended up copying flyway/jooq setup from a personal project. Not
   ideal... I wanted to get JPA working, but I already sunk too much time on this issue.
 - Providing a starter template project could cut down the time a candidate has to spend on configuring their
-  environment/project. I spent as much time on project setup and dependency management as I did on the task requirements
-  themselves.
-- Does the project even need to be runnable? I assumed so, but now I'm not sure if that's the case.
+  environment/project.
+- Does the project even need to be runnable? I initially assumed so, but given the time constraints, that probably
+  wasn't necessary. Definitely spent too much time on that.

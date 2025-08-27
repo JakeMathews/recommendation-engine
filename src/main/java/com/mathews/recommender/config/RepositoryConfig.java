@@ -25,7 +25,7 @@ public class RepositoryConfig {
     }
 
     @Bean
-    public ActionsRepository actionsRepository() {
-        return new PostgresActionsRepository();
+    public ActionsRepository actionsRepository(DSLContext dslContext) {
+        return new PostgresActionsRepository(dslContext);
     }
 }

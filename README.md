@@ -36,6 +36,12 @@ The root of the project contains the Spring application, with the application co
 - Run `./gradlew generateJooq` to generate jooq classes from the database schema
 - Run `./gradlew bootRun` to run the application
 
+# Testing
+
+- Run `./gradlew clean test` to run the tests
+    - Note: There only exists one test suite for recommendations, this helped flush out configuration issues,
+      but there was insufficient time to write additional tests.
+
 # Struggles and Feedback
 
 - Adding postgres took WAYYY longer than expected. Ended up copying flyway/jooq setup from a personal project. Not

@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
-public class RecommendationControllerTest {
+public class RecommendationsControllerTest {
     private final Random random = new Random();
     @Autowired
     private WebTestClient webTestClient;
